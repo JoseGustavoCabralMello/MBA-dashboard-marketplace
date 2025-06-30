@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Separator } from "@/components/ui/separator"
+import { BookKeyIcon, EyeIcon, Mail } from "lucide-react"
 import { Helmet } from "react-helmet-async"
 
 export function SignIn() {
@@ -20,8 +22,22 @@ export function SignIn() {
 
           <form className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">Seu e-mail</Label>
-              <Input id="email" type="email"/>
+              <Label htmlFor="email">E-MAIL</Label>
+              <div className="flex items-center text-muted-foreground">
+                <Mail />
+                <Input className="ring-0 border-0 shadow-none focus-visible:ring-offset-0 focus-visible:ring-0" id="email" type="email" placeholder="Seu e-mail cadastrado"/>
+              </div>
+              <Separator />
+            </div>
+
+            <div className="space-y-2" >
+              <Label htmlFor="password">SENHA</Label>
+              <div className="flex items-center text-muted-foreground">
+                <BookKeyIcon />
+                <Input className="ring-0 border-0 shadow-none focus-visible:ring-offset-0 focus-visible:ring-0" id="password" type="password" placeholder="Sua senha de acesso"/>
+                <EyeIcon />
+              </div>
+              <Separator />
             </div>
 
             <Button className="w-full" type="submit">Acessar painel</Button>
