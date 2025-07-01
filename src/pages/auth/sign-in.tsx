@@ -12,11 +12,11 @@ export function SignIn() {
       <div className="p-8">
         <div className="flex w-[350px] flex-col justify-center gap-6">
           <div className="flex flex-col gap-2 text-center">
-            <h1 className="text-2xl font-semibold tracking-tight">
-              Acessar painel
+            <h1 className="font-dm-sans text-2xl font-bold tracking-tight">
+              Acesse sua conta
             </h1>
-            <p className="text-sm text-muted-foreground">
-              Acompanhe suas vendas pelo painel do parceiro
+            <p className="font-poppins text-sm text-muted-foreground">
+              Informe seu e-mail para entrar
             </p>
           </div>
 
