@@ -9,3 +9,4 @@ export const theme = {
 export const plugins = [];
 
       //--font-dm-sans: "DM-sans", "sans-serif";
+      //--font-poppins: "Poppins", "sans-serif";
