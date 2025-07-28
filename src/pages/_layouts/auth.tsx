@@ -16,16 +16,39 @@ export function AuthLayout() {
         </div>
       </div>
       <div className="items-center gap-3 text-lg text-foreground">
-        <div className="flex bg-white rounded-3xl h-auto w-auto">
-          <div className="items-center justify-center bg-blue-200 h-14 w-14">
-            <img className="" src="/src/assets/sale-tag.svg" alt="" />
+        <div className="flex bg-white rounded-3xl gap-3 p-3 pr-4 h-auto w-max">
+          <div className="flex items-center justify-center bg-blue-200 rounded-2xl h-14 w-14">
+            <img className="h-7 w-7" src="/src/assets/sale-tag.svg" alt="" />
           </div>
-          <p>
-            Acompanhe os produtos vendidos
-          </p>
+          <div className="w-38">
+            <p>
+              Acompanhe os produtos vendidos
+            </p>
+          </div>
         </div>
-        <img src="/src/assets/store.svg" alt="" />
-        <img src="/src/assets/chart-histogram.svg" alt="" />
+      
+        <div className="flex bg-white rounded-3xl gap-3 p-3 pr-4 h-auto w-max">
+          <div className="flex items-center justify-center bg-blue-200 rounded-2xl h-14 w-14">
+            <img className="h-7 w-7" src="/src/assets/store.svg" alt="" />
+          </div>
+          <div className="w-38">
+            <p>
+              Gerencie seus anúncios
+            </p>
+          </div>
+        </div>
+
+        <div className="flex bg-white rounded-3xl gap-3 p-3 pr-4 h-auto w-max">
+          <div className="flex items-center justify-center bg-blue-200 rounded-2xl h-14 w-14">
+            <img className="h-7 w-7" src="/src/assets/chart-histogram.svg" alt="" />
+          </div>
+          <div className="w-38">
+            <p>
+              Veja sua loja crescendo
+            </p>
+          </div>
+        </div>
+        
         <img src="/src/assets/Vector.svg" alt="" />
         <img src="/src/assets/kraft-box.svg" alt="" />
       </div>  
