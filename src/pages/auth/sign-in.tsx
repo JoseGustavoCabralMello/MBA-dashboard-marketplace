@@ -4,8 +4,26 @@ import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { BookKeyIcon, EyeIcon, Mail } from "lucide-react"
 import { Helmet } from "react-helmet-async"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
+
+const signInForm = z.object({
+  email: z.email(),
+  password: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
+})
+
+type SignInForm = z.infer<typeof signInForm>
 
 export function SignIn() {
+  const { register, handleSubmit, formState: { isSubmitting } } = useForm<SignInForm>();
+
+  async function handleSignIn(data: SignInForm){
+    console.log("Form submitted:", data);
+    
+    await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate a network request
+
+  }
+
   return (
     <>
       <Helmet title="Login"/>
@@ -20,12 +38,12 @@ export function SignIn() {
             </p>
           </div>
 
-          <form className="space-y-4">
+          <form onSubmit={handleSubmit(handleSignIn)} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">E-MAIL</Label>
               <div className="flex items-center text-muted-foreground">
                 <Mail />
-                <Input className="ring-0 border-0 shadow-none focus-visible:ring-offset-0 focus-visible:ring-0" id="email" type="email" placeholder="Seu e-mail cadastrado"/>
+                <Input className="ring-0 border-0 shadow-none focus-visible:ring-offset-0 focus-visible:ring-0" id="email" type="email" placeholder="Seu e-mail cadastrado" {...register('email')} />
               </div>
               <Separator />
             </div>
@@ -34,13 +52,13 @@ export function SignIn() {
               <Label htmlFor="password">SENHA</Label>
               <div className="flex items-center text-muted-foreground">
                 <BookKeyIcon />
-                <Input className="ring-0 border-0 shadow-none focus-visible:ring-offset-0 focus-visible:ring-0" id="password" type="password" placeholder="Sua senha de acesso"/>
+                <Input className="ring-0 border-0 shadow-none focus-visible:ring-offset-0 focus-visible:ring-0" id="password" type="password" placeholder="Sua senha de acesso" {...register('password')}/>
                 <EyeIcon />
               </div>
               <Separator />
             </div>
 
-            <Button className="w-full" type="submit">Acessar painel</Button>
+            <Button disabled={isSubmitting} className="w-full" type="submit">Acessar painel</Button>
           </form>
         </div>
       </div>
