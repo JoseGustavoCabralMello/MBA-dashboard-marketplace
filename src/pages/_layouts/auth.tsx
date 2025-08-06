@@ -3,7 +3,7 @@ import { Outlet } from "react-router";
 export function AuthLayout() {
   return (
     <div className="min-h-screen grid grid-cols-2">
-      <div className="h-full border-r border-foreground/5 bg-orange-100 p-10 text-muted-foreground flex flex-col justify-between ">
+      <div className="h-full border-r border-foreground/5 bg-muted p-10 text-muted-foreground flex flex-col justify-between ">
         <div className="flex items-center gap-3 text-lg text-foreground">
           <img src="/src/assets/Logo.svg" alt="" />
           <div>
@@ -15,9 +15,9 @@ export function AuthLayout() {
             </p>
           </div>
         </div>
-        <div className="relative min-w-min h-full min-h-auto justify-center items-center gap-3 text-lg text-foreground border-2 border-blue-400">
+        <div className="relative h-full justify-center items-center gap-3 text-lg text-foreground">
 
-          <div className="absolute top-1/6 right-1/5 flex bg-white rounded-3xl gap-3 p-3 pr-4 h-auto w-max">
+          <div className="absolute top-1/6 left-1/2 flex bg-white rounded-3xl gap-3 p-3 pr-4 h-auto w-max">
             <div className="flex items-center justify-center bg-blue-200 rounded-2xl h-14 w-14">
               <img className="h-7 w-7" src="/src/assets/sale-tag.svg" alt="" />
             </div>
@@ -28,7 +28,7 @@ export function AuthLayout() {
             </div>
           </div>
         
-          <div className="absolute bottom-1/2 left-1/8 z-11 flex bg-white rounded-3xl gap-3 p-3 pr-4 h-auto w-max">
+          <div className="absolute bottom-1/2 left-1/9 z-11 flex bg-white rounded-3xl gap-3 p-3 pr-4 h-auto w-max">
             <div className="flex items-center justify-center bg-blue-200 rounded-2xl h-14 w-14">
               <img className="h-7 w-7" src="/src/assets/store.svg" alt="" />
             </div>
@@ -39,7 +39,7 @@ export function AuthLayout() {
             </div>
           </div>
 
-          <div className="absolute bottom-1/4 right-1/8 flex bg-white rounded-3xl gap-3 p-3 pr-4 h-auto w-max">
+          <div className="absolute bottom-3/12 right-1/8 flex bg-white rounded-3xl gap-3 p-3 pr-4 h-auto w-max">
             <div className="flex items-center justify-center bg-blue-200 rounded-2xl h-14 w-14">
               <img className="h-7 w-7" src="/src/assets/chart-histogram.svg" alt="" />
             </div>
@@ -49,10 +49,12 @@ export function AuthLayout() {
               </p>
             </div>
           </div>
-          <div className="absolute w-full top-1/3">
-            <img className="w-full" src="/src/assets/Vector.svg" alt="" />
+
+          <div className="reltive h-full w-full flex items-center justify-center">
+            <img className="absolute w-full border-2 border-green-500" src="/src/assets/Vector.png" alt="" />
+            <img className="absolute h-1/2 z-1 border-2 border-red-500" src="/src/assets/box.png" alt="" />
           </div>
-          <div className="absolute h-100 w-100 z-10 flex bottom-1/5 right-1/6">
+          <div className="absolute h-1/2 w-1/2 z-10 flex bottom-1/5 right-1/6">
             <img className="h-full w-full" src="/src/assets/kraft-box.svg" alt="" />
           </div>          
         </div>  
