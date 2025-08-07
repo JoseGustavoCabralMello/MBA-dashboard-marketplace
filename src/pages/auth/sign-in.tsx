@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator"
 import { BookKeyIcon, EyeIcon, Mail } from "lucide-react"
 import { Helmet } from "react-helmet-async"
 import { useForm } from "react-hook-form"
+import { toast } from "sonner"
 import { z } from "zod"
 
 const signInForm = z.object({
@@ -18,10 +19,20 @@ export function SignIn() {
   const { register, handleSubmit, formState: { isSubmitting } } = useForm<SignInForm>();
 
   async function handleSignIn(data: SignInForm){
-    console.log("Form submitted:", data);
+    try {
+      console.log("Form submitted:", data);
     
-    await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate a network request
+      await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate a network request
 
+      toast.success('Enviamos um link de autenticação para o seu e-mail.', {
+        action: {
+          label: 'Reenviar',
+          onClick: () => handleSignIn(data),
+        },
+      })
+    } catch (error) {
+      toast.error('Credenciais inválidas!.')
+    }
   }
 
   return (
