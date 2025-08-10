@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator"
 import { BookKeyIcon, EyeIcon, Mail } from "lucide-react"
 import { Helmet } from "react-helmet-async"
 import { useForm } from "react-hook-form"
-import { Link } from "react-router-dom"
+import { Link } from "react-router"
 import { toast } from "sonner"
 import { z } from "zod"
 
@@ -40,10 +40,12 @@ export function SignIn() {
     <>
       <Helmet title="Login"/>
       <div className="p-8">
-        <Button variant="ghost" asChild className="absolute top-8 right-8">  
-          <Link to="/sign-up" className="absolute top-4 right-4 text-sm text-blue-500 hover:underline">
+        <Button variant="ghost" asChild className="absolute top-8 right-8">
+          
+         <Link to="/sign-up" className="absolute top-8 right-8">
           Novo estabelecimento
           </Link>
+           
         </Button>
 
         <div className="flex w-[350px] flex-col justify-center gap-6">

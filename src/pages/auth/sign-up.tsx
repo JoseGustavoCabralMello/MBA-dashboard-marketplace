@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator"
 import { BookKeyIcon, EyeIcon, Mail } from "lucide-react"
 import { Helmet } from "react-helmet-async"
 import { useForm } from "react-hook-form"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router"
 import { toast } from "sonner"
 import { z } from "zod"
 
@@ -52,7 +52,7 @@ export function SignUp() {
       <div className="p-8">
 
         <Button variant="ghost" asChild className="absolute top-8 right-8">  
-          <Link to="/sign-in" className="absolute top-4 right-4 text-sm text-blue-500 hover:underline">
+          <Link to="/sign-in" className="absolute top-8 right-8">
           Fazer login
           </Link>
         </Button>
