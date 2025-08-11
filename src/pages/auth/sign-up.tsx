@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
-import { BookKeyIcon, EyeIcon, Mail } from "lucide-react"
+import { EyeIcon, KeyRound, Mail, Phone, User } from "lucide-react"
 import { Helmet } from "react-helmet-async"
 import { useForm } from "react-hook-form"
 import { Link, useNavigate } from "react-router"
@@ -10,16 +10,11 @@ import { toast } from "sonner"
 import { z } from "zod"
 
 const signUpForm = z.object({
-  restourantName: z.string().min(1, "O nome do restaurante é obrigatório"),
-  managerName: z.string().min(1, "O nome do gerente é obrigatório"),
+  userName: z.string().min(1, "O nome do gerente é obrigatório"),
   phone: z.string().min(10, "O telefone deve ter pelo menos 10 dígitos"),
-  address: z.string().min(1, "O endereço é obrigatório"),
-  city: z.string().min(1, "A cidade é obrigatória"),
-  state: z.string().min(1, "O estado é obrigatório"),
-  zipCode: z.string().min(8, "O CEP deve ter pelo menos 8 dígitos"),
-  cnpj: z.string().min(14, "O CNPJ deve ter pelo menos 14 dígitos"),
   email: z.email(),
   password: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
+  confirmPassword: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
 })
 
 type SignUpForm = z.infer<typeof signUpForm>
@@ -57,22 +52,57 @@ export function SignUp() {
           </Link>
         </Button>
 
-        <div className="flex w-[350px] flex-col justify-center gap-6">
-          <div className="flex flex-col gap-2 text-center">
-            <h1 className="font-display text-2xl font-bold tracking-tight">
-              Crie sua conta
-            </h1>
-            <p className="text-sm text-muted-foreground">
-              Informe seus dados pessoais e de acesso
-            </p>
-          </div>
+        <div className="flex w-[350px] flex-col justify-center gap-6 overflow-scroll">
+            <div className="flex flex-col gap-2 text-left mb-10">
+              <h1 className="font-display text-2xl font-bold tracking-tight">
+                Crie sua conta
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                Informe seus dados pessoais e de acesso
+              </p>
+            </div>
 
           <form onSubmit={handleSubmit(handleSignUp)} className="space-y-4">
+
+            <div className="flex flex-col gap-2 text-left">
+              <h2 className="font-display text-2xl font-bold tracking-tight">
+                Perfil
+              </h2>
+            </div>
+
+              <div className="flex items-center text-muted-foreground">
+                <img src="/src/assets/user.jpeg" className="w-30 h-30" id="avatar" />
+              </div>  
+
+            <div className="space-y-2">
+              <Label htmlFor="name">NOME</Label>
+              <div className="flex items-center text-muted-foreground">
+                <User />
+                <Input className="ring-0 border-0 shadow-none focus-visible:ring-offset-0 focus-visible:ring-0" id="name" type="text" placeholder="Seu nome completo" {...register('userName')} />
+              </div>
+              <Separator />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="phone">TELEFONE</Label>
+              <div className="flex items-center text-muted-foreground">
+                <Phone />
+                <Input className="ring-0 border-0 shadow-none focus-visible:ring-offset-0 focus-visible:ring-0" id="phone" type="tel" placeholder="(00) 0000-0000" {...register('phone')} />
+              </div>
+              <Separator />
+            </div>
+
+            <div className="flex flex-col gap-2 text-left mt-12">
+              <h2 className="font-display text-2xl font-bold tracking-tight">
+                Acesso
+              </h2>
+            </div>
+
             <div className="space-y-2">
               <Label htmlFor="email">E-MAIL</Label>
               <div className="flex items-center text-muted-foreground">
                 <Mail />
-                <Input className="ring-0 border-0 shadow-none focus-visible:ring-offset-0 focus-visible:ring-0" id="email" type="email" placeholder="Seu e-mail cadastrado" {...register('email')} />
+                <Input className="ring-0 border-0 shadow-none focus-visible:ring-offset-0 focus-visible:ring-0" id="email" type="email" placeholder="Seu e-mail de acesso" {...register('email')} />
               </div>
               <Separator />
             </div>
@@ -80,11 +110,21 @@ export function SignUp() {
             <div className="space-y-2" >
               <Label htmlFor="password">SENHA</Label>
               <div className="flex items-center text-muted-foreground">
-                <BookKeyIcon />
-                <Input className="ring-0 border-0 shadow-none focus-visible:ring-offset-0 focus-visible:ring-0" id="password" type="password" placeholder="Sua senha de acesso" {...register('password')}/>
+                <KeyRound />
+                <Input className="ring-0 border-0 shadow-none focus-visible:ring-offset-0 focus-visible:ring-0" id="password" type="password" placeholder="Senha de acesso" {...register('password')}/>
                 <EyeIcon />
               </div>
+
               <Separator />
+
+              <Label htmlFor="cofirm-password">CONFIRMAR SENHA</Label>
+              <div className="flex items-center text-muted-foreground">
+                <KeyRound />
+                <Input className="ring-0 border-0 shadow-none focus-visible:ring-offset-0 focus-visible:ring-0" id="cofirm-password" type="password" placeholder="Confirme a senha" {...register('confirmPassword')}/>
+                <EyeIcon />
+              </div>
+              
+              <Separator className="mb-12"/>
             </div>
 
             <Button disabled={isSubmitting} className="w-full" type="submit">Cadastrar</Button>
