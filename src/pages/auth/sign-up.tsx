@@ -70,8 +70,8 @@ export function SignUp() {
               </h2>
             </div>
 
-              <div className="flex items-center text-muted-foreground">
-                <img src="/src/assets/user.jpeg" className="w-30 h-30" id="avatar" />
+              <div className="flex items-center">
+                <img src="/src/assets/user.jpeg" className="w-30 h-30 rounded-2xl" id="avatar" />
               </div>  
 
             <div className="space-y-2">
