@@ -1,4 +1,4 @@
-import { RouterProvider } from 'react-router/dom'
+import { RouterProvider } from 'react-router-dom'
 import './index.css'
 import { router } from './routes'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
