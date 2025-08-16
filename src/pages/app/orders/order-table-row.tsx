@@ -25,7 +25,7 @@ export function OrderTableRow() {
                   </div>
                 </TableCell>
                 <TableCell className="font-medium">
-                  Dieco Schell Fernandes
+                  Diego Schell Fernandes
                 </TableCell>
                 <TableCell className="font-medium">R$ 149,90</TableCell>
                 <TableCell>
