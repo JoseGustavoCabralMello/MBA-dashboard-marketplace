@@ -1,7 +1,9 @@
+import { signIn } from "@/api/sign-in"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
+import { useMutation } from "@tanstack/react-query"
 import { BookKeyIcon, EyeIcon, Mail } from "lucide-react"
 import { Helmet } from "react-helmet-async"
 import { useForm } from "react-hook-form"
@@ -19,11 +21,15 @@ type SignInForm = z.infer<typeof signInForm>
 export function SignIn() {
   const { register, handleSubmit, formState: { isSubmitting } } = useForm<SignInForm>();
 
+  const { mutateAsync: authenticate } = useMutation({
+    mutationFn: signIn,
+  })
+
   async function handleSignIn(data: SignInForm){
     try {
       console.log("Form submitted:", data);
     
-      await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate a network request
+      await authenticate({ email: data.email })
 
       toast.success('Enviamos um link de autenticação para o seu e-mail.', {
         action: {
