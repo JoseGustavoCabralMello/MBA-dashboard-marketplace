@@ -12,6 +12,8 @@ import { toast } from "sonner"
 import { z } from "zod"
 
 const signUpForm = z.object({
+  restaurantName: z.string().min(1, "O nome do restaurante é obrigatório"), // deletar depois dos testes
+  managerName: z.string().min(1, "O nome do gerente é obrigatório"), // deletar depois dos testes
   userName: z.string().min(1, "O nome do gerente é obrigatório"),
   phone: z.string().min(10, "O telefone deve ter pelo menos 10 dígitos"),
   email: z.email(),
@@ -89,7 +91,7 @@ export function SignUp() {
               <Label htmlFor="name">NOME</Label>
               <div className="flex items-center text-muted-foreground">
                 <User />
-                <Input className="ring-0 border-0 shadow-none focus-visible:ring-offset-0 focus-visible:ring-0" id="name" type="text" placeholder="Seu nome completo" {...register('userName')} />
+                <Input className="ring-0 border-0 shadow-none focus-visible:ring-offset-0 focus-visible:ring-0" id="name" type="text" placeholder="Seu nome completo" {...register('restaurantName')} />
               </div>
               <Separator />
             </div>
