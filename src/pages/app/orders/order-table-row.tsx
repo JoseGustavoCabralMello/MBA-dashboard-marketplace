@@ -1,11 +1,12 @@
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
-import { OrderDetails } from "@/components/order-details";
+import { OrderDetails } from "@/pages/app/orders/order-details";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { TableCell, TableRow } from "@/components/ui/table";
 import { ArrowRight, Search, X } from "lucide-react";
 import { OrderStatus } from '@/components/order-status';
+import { useState } from 'react';
 
 interface OrderTableRowProps {
   order: {
@@ -18,52 +19,55 @@ interface OrderTableRowProps {
 }
 
 export function OrderTableRow({ order }: OrderTableRowProps) {
-  return (<TableRow>
-                <TableCell>
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button variant="outline" size="xs">
-                        <Search className="h-3 w-3" />
-                        <span className="sr-only">Detalhes do pedido</span>
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent>
-                      <OrderDetails />
-                    </DialogContent>
-                  </Dialog>
-                </TableCell>
-                <TableCell className="font-mono font-medium text-sm">
-                  {order.orderId}
-                </TableCell>
-                <TableCell className="text-muted-foreground">
-                  {formatDistanceToNow(order.createdAt, {
-                    locale: ptBR,
-                    addSuffix: true,
-                  })}
-                </TableCell>
-                
-                <TableCell>
-                  <OrderStatus status={order.status} />
-                </TableCell>
-                <TableCell className="font-medium">{order.customerName}</TableCell>
-                <TableCell className="font-medium">
-                  {order.total.toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                  })}
-                </TableCell>
-                
-                <TableCell>
-                  <Button variant="outline" size="xs">
-                    <ArrowRight className="h-3 w-3 mr-2" />
-                    Aprovar
-                  </Button>
-                </TableCell>
-                <TableCell>
-                  <Button variant="ghost" size="xs">
-                    <X className="h-3 w-3 mr-2" />
-                    Cancelar
-                  </Button>
-                </TableCell>
-              </TableRow>)
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false)
+
+  return (
+    <TableRow>
+      <TableCell>
+        <Dialog open={isDetailsOpen} onOpenChange={setIsDetailsOpen}>
+          <DialogTrigger asChild>
+            <Button variant="outline" size="xs">
+              <Search className="h-3 w-3" />
+              <span className="sr-only">Detalhes do pedido</span>
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <OrderDetails open={isDetailsOpen} orderId={order.orderId} />
+          </DialogContent>
+        </Dialog>
+      </TableCell>
+      <TableCell className="font-mono font-medium text-sm">
+        {order.orderId}
+      </TableCell>
+      <TableCell className="text-muted-foreground">
+        {formatDistanceToNow(order.createdAt, {
+          locale: ptBR,
+          addSuffix: true,
+        })}
+      </TableCell>
+      
+      <TableCell>
+        <OrderStatus status={order.status} />
+      </TableCell>
+      <TableCell className="font-medium">{order.customerName}</TableCell>
+      <TableCell className="font-medium">
+        {(order.total/100).toLocaleString('pt-BR', {
+          style: 'currency',
+          currency: 'BRL',
+        })}
+      </TableCell>
+      
+      <TableCell>
+        <Button variant="outline" size="xs">
+          <ArrowRight className="h-3 w-3 mr-2" />
+          Aprovar
+        </Button>
+      </TableCell>
+      <TableCell>
+        <Button variant="ghost" size="xs">
+          <X className="h-3 w-3 mr-2" />
+          Cancelar
+        </Button>
+      </TableCell>
+    </TableRow>)
 }
