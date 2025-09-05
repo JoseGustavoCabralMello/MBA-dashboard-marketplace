@@ -20,6 +20,8 @@ import { subDays } from 'date-fns'
 import { useQuery } from '@tanstack/react-query'
 import { getDailyRevenueInPeriod } from '@/api/get-daily-revenue-in-period'
 import { DateRangePicker } from '@/components/ui/date-range-picker'
+import { Label } from '@/components/ui/label'
+import type { DateRange } from 'react-day-picker'
 
 
 export function RevenueChart() {
