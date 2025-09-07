@@ -12,7 +12,7 @@ export const router = createBrowserRouter([
     element: <AppLayout />, 
     errorElement: <NotFound />,
     children: [
-      { path: '/', element: <Dasboard /> },
+      { path: '/dashboard', element: <Dasboard /> },
       { path: '/orders', element: <Orders /> },
       
     ]

@@ -2,8 +2,14 @@ import { api } from '@/lib/axios'
 
 export interface SignInBody {
   email: string
+  password: string
 }
 
-export async function signIn({ email }: SignInBody) {
-  await api.post('/authenticate', { email })
+export interface SignInResponse {
+  token: string
+}
+
+export async function signIn({ email, password }: SignInBody): Promise<SignInResponse> {
+  const response = await api.post('/sellers/sessions', { email, password })
+  return response.data // Espera-se que o backend retorne { token: '...' }
 }
