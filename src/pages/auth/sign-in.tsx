@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form"
 import { Link, useSearchParams } from "react-router-dom"
 import { toast } from "sonner"
 import { z } from "zod"
+import { setToken } from "@/utils/jwt"
 
 const signInForm = z.object({
   email: z.email(),
@@ -36,12 +37,15 @@ export function SignIn() {
     try {
       console.log("Form submitted:", data);
     
-      await authenticate({ email: data.email, password: data.password })
+      const response = await authenticate({ email: data.email, password: data.password });
+      setToken(response.token); // Store the JWT token
 
-      toast.success('Enviamos um link de autenticação para o seu e-mail.', {
+      toast.success('Login bem-sucedido! Você será redirecionado.', {
         action: {
-          label: 'Reenviar',
-          onClick: () => handleSignIn(data),
+          label: 'Continuar',
+          onClick: () => {
+            // Redirect or perform any other action after successful login
+          },
         },
       })
     } catch (error) {
@@ -54,11 +58,9 @@ export function SignIn() {
       <Helmet title="Login"/>
       <div className="p-8">
         <Button variant="ghost" asChild className="absolute top-8 right-8">
-          
-         <Link to="/sign-up" className="absolute top-8 right-8">
-          Novo estabelecimento
+          <Link to="/sign-up" className="absolute top-8 right-8">
+            Novo estabelecimento
           </Link>
-           
         </Button>
 
         <div className="flex w-[350px] flex-col justify-center gap-6">
@@ -81,7 +83,7 @@ export function SignIn() {
               <Separator />
             </div>
 
-            <div className="space-y-2" >
+            <div className="space-y-2">
               <Label htmlFor="password">SENHA</Label>
               <div className="flex items-center text-muted-foreground">
                 <BookKeyIcon />

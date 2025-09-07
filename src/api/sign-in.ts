@@ -1,10 +1,17 @@
-import { api } from '@/lib/axios'
+import axios from 'axios';
+import { setToken } from '@/utils/jwt';
 
-export interface SignInBody {
-  email: string
-  password: string
-}
+export async function signIn(credentials: { email: string; password: string }) {
+  try {
+    const response = await axios.post('/sellers/sessions', credentials);
+    const { token } = response.data;
 
-export async function signIn({ email, password }: SignInBody) {
-  await api.post('/sellers/sessions', { email, password })
+    if (token) {
+      setToken(token);
+    }
+
+    return token;
+  } catch (error) {
+    throw new Error('Authentication failed. Please check your credentials.');
+  }
 }
