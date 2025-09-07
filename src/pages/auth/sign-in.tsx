@@ -24,6 +24,7 @@ export function SignIn() {
   const { register, handleSubmit, formState: { isSubmitting } } = useForm<SignInForm>({
     defaultValues: {
       email: searchParams.get('email') ?? '',
+      password: searchParams.get('password') ?? '',
     },
   });
 
@@ -35,7 +36,7 @@ export function SignIn() {
     try {
       console.log("Form submitted:", data);
     
-      await authenticate({ email: data.email })
+      await authenticate({ email: data.email, password: data.password })
 
       toast.success('Enviamos um link de autenticação para o seu e-mail.', {
         action: {
