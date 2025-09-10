@@ -43,7 +43,7 @@ export function RevenueChart() {
     return dailyRevenueInPeriod?.map((chartItem) => {
       return {
         date: chartItem.date,
-        receipt: chartItem.receipt / 100,
+        receipt: chartItem.amount / 100,
       }
     })
   }, [dailyRevenueInPeriod])

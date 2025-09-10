@@ -5,17 +5,21 @@ export interface GetDailyRevenueInPeriodQuery {
   to?: Date
 }
 
-export type GetDailyRevenueInPeriodResponse = {
+export type GetDailyRevenueInPeriodItem = {
   date: string
-  receipt: number
-}[]
+  amount: number
+}
+
+export type GetDailyRevenueInPeriodResponse = {
+ viewsPerDay:Array<GetDailyRevenueInPeriodItem>
+}
 
 export async function getDailyRevenueInPeriod({
   from,
   to,
 }: GetDailyRevenueInPeriodQuery) {
   const response = await api.get<GetDailyRevenueInPeriodResponse>(
-    '/metrics/daily-receipt-in-period',
+    '/sellers/metrics/views/days',
     {
       params: {
         from,
@@ -23,6 +27,6 @@ export async function getDailyRevenueInPeriod({
       },
     },
   )
-
-  return response.data
+  console.log(response.data.viewsPerDay)
+  return response.data.viewsPerDay
 }
