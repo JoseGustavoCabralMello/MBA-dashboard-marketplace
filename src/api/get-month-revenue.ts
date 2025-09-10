@@ -10,6 +10,6 @@ export async function getMonthRevenue() {
   const response = await api.get<GetMonthRevenueResponse>(
     '/sellers/metrics/products/sold',
   )
-  console.log(response.data.amount)
+  console.log(response.data)
   return response.data
 }
