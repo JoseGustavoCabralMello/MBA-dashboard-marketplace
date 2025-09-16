@@ -35,6 +35,7 @@ export async function getProducts({
     },
   })
 
+  console.log('get-products.ts')
   console.log(response.data)
   return response.data
 }

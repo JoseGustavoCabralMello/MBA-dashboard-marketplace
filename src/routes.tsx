@@ -6,7 +6,7 @@ import { AuthLayout } from "./pages/_layouts/auth";
 import { SignUp } from "./pages/auth/sign-up";
 import { Orders } from "./pages/app/orders/orders";
 import { NotFound } from "./pages/404";
-import { Products } from "./pages/app/orders/prducts";
+import { Products } from "./pages/app/orders/products";
 
 export const router = createBrowserRouter([
   { path: '/', 
