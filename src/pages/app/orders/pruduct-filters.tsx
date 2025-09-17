@@ -8,7 +8,7 @@ import { useSearchParams } from "react-router-dom";
 import z from "zod";
 
 const productFiltersSchema = z.object({
-  id: z.string().optional(),
+  productId: z.string().optional(),
   // customerName: z.string().optional(),
   // status: z.string().optional(),
 })
@@ -26,7 +26,7 @@ export function ProductTableFilters() {
     useForm<ProductFiltersSchema>({
       resolver: zodResolver(productFiltersSchema),
       defaultValues: {
-        id: id ?? '',
+        productId: id ?? '',
         // customerName: customerName ?? '',
         // status: status ?? 'all',
       },
@@ -34,12 +34,12 @@ export function ProductTableFilters() {
 
   function handleFilter({ 
     //customerName, 
-    id, 
+    productId, 
     //status 
     }: ProductFiltersSchema) {
     setSearchParams((state) => {
-      if (id) {
-        state.set('id', id)
+      if (productId) {
+        state.set('id', productId)
       } else {
         state.delete('id')
       }
@@ -73,7 +73,7 @@ export function ProductTableFilters() {
     })
 
     reset({
-      id: '',
+      productId: '',
       // customerName: '',
       // status: 'all',
     })
@@ -88,7 +88,7 @@ export function ProductTableFilters() {
       <Input
         placeholder="ID do pedido"
         className="h-8 w-auto"
-        {...register('id')}
+        {...register('productId')}
       />
       {/* <Input
         placeholder="Nome do cliente"

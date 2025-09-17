@@ -5,7 +5,7 @@ export interface GetProductDetailsParams {
 }
 
 export interface GetProductDetailsResponse {
-  id: string
+  productId: string
   // createdAt: string
   // status: 'pending' | 'canceled' | 'processing' | 'delivering' | 'delivered'
   // totalInCents: number
@@ -27,7 +27,7 @@ export interface GetProductDetailsResponse {
 export async function getProductDetails({ id }: GetProductDetailsParams) {
   const response = await api.get<GetProductDetailsResponse>(`/products/${id}`)
 
-  console.log('get-product-by-id.ts')
+  console.log('get-product-details.ts')
   console.log(response.data)
   return response.data
 }

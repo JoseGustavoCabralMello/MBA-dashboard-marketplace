@@ -10,17 +10,17 @@ import { ProductTableFilters } from "./pruduct-filters";
 export function Products() {
   const [searchParams, setSearchParams] = useSearchParams()
 
-  const id = searchParams.get('id')
+  const productId = searchParams.get('productId')
   const title = searchParams.get('title')
   const description = searchParams.get('description')
   const priceInCents = searchParams.get('priceInCents')
   const status = searchParams.get('status')
 
   const { data: result } = useQuery({
-    queryKey: ['products', id, title, description, priceInCents, status],
+    queryKey: ['products', productId, title, description, priceInCents, status],
     queryFn: () =>
       getProducts({
-        id,
+        productId,
         title,
         description,
         priceInCents: priceInCents ? Number(priceInCents) : null,
@@ -54,7 +54,7 @@ export function Products() {
               <TableBody>
                 {result &&
                   result.products.map((product) => {
-                    return <ProductTableRow key={product.id} products={product} />
+                    return <ProductTableRow key={product.productId} products={product} />
                   })}
               </TableBody>
             </Table>

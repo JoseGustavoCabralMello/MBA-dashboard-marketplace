@@ -10,11 +10,11 @@ export interface GetProductsQuery {
 
 export interface GetProductsResponse {
   products: {
-    id: string
+    productId: string
     title: string
     description: string
     priceInCents: number
-        status: 'available' | 'sold' | 'cancelled'
+    status: 'available' | 'sold' | 'cancelled'
   }[]
 }
 

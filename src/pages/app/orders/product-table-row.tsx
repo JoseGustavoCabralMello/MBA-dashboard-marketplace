@@ -15,10 +15,11 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 //import { deliverOrder } from '@/api/deliver-product';
 import type { GetProductsResponse } from '@/api/get-products';
 import { ProductStatus } from '@/components/product-status';
+import { ProductDetails } from "./product-details";
 
 interface ProductTableRowProps {
   products: {
-    id: string
+    productId: string
     title: string
     description: string
     priceInCents: number
@@ -30,7 +31,7 @@ export function ProductTableRow({ products }: ProductTableRowProps) {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false)
   const queryClient = useQueryClient()
 
-  function updateOrderStatusOnCache(id: string, status: ProductStatus) {
+  function updateOrderStatusOnCache(productId: string, status: ProductStatus) {
     const productListCache = queryClient.getQueriesData<GetProductsResponse>({
       queryKey: ['products'],
     })
@@ -43,7 +44,7 @@ export function ProductTableRow({ products }: ProductTableRowProps) {
       queryClient.setQueryData<GetProductsResponse>(cacheKey, {
         ...cacheData,
         products: cacheData.products.map((product) => {
-          if (product.id === id) {
+          if (product.productId === productId) {
             return { ...product, status }
           }
             return product
@@ -96,13 +97,13 @@ export function ProductTableRow({ products }: ProductTableRowProps) {
               <span className="sr-only">Detalhes do pedido</span>
             </Button>
           </DialogTrigger>
-          {/* <DialogContent>
-            <OrderDetails open={isDetailsOpen} productId={products.id} />
-          </DialogContent> */}
+          <DialogContent>
+            <ProductDetails open={isDetailsOpen} productId={products.productId} />
+          </DialogContent>
         </Dialog>
       </TableCell>
       <TableCell className="font-mono font-medium text-sm">
-        {products.id}
+        {products.productId}
       </TableCell>
       {/* <TableCell className="text-muted-foreground">
         {formatDistanceToNow(product.createdAt, {

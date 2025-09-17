@@ -1,4 +1,4 @@
-import { getOrderDetails } from '@/api/get-order-details'
+import { getProductDetails } from '@/api/get-product-details'
 import {
   DialogContent,
   DialogDescription,
@@ -18,35 +18,35 @@ import { useQuery } from '@tanstack/react-query'
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 
-export interface OrderDetailsProps {
-  orderId: string
+export interface ProductDetailsProps {
+  productId: string
   open: boolean
 }
 
-export function OrderDetails({ orderId, open }: OrderDetailsProps) {
-  const { data: order } = useQuery({
-    queryKey: ['order', orderId],
-    queryFn: () => getOrderDetails({ orderId }),
+export function ProductDetails({ productId, open }: ProductDetailsProps) {
+  const { data: product } = useQuery({
+    queryKey: ['product', productId],
+    queryFn: () => getProductDetails({ id: productId }),
     enabled: open,
   })
   return (
     <DialogContent>
       <DialogHeader>
-        <DialogTitle>Pedido: {orderId}</DialogTitle>
+        <DialogTitle>Pedido: {productId}</DialogTitle>
         <DialogDescription>Detalhes do pedido</DialogDescription>
       </DialogHeader>
 
-      {order && (
+      {product && (
         <div className="space-y-6">
           <Table>
-            <TableBody>
+            {/* <TableBody>
               <TableRow>
                 <TableCell className="text-muted-foreground">Status</TableCell>
                 <TableCell className="flex justify-end">
                   <div className="flex items-center gap-2">
                     <span className="h-2 w-2 rounded-full bg-slate-400" />
                     <span className="font-medium text-muted-foreground">
-                      {order.status}
+                      {product.status}
                     </span>
                   </div>
                 </TableCell>
@@ -54,19 +54,19 @@ export function OrderDetails({ orderId, open }: OrderDetailsProps) {
               <TableRow>
                 <TableCell className="text-muted-foreground">Cliente</TableCell>
                 <TableCell className="flex justify-end">
-                  {order.customer.name}
+                  {product.customer.name}
                 </TableCell>
               </TableRow>
               <TableRow>
                 <TableCell className="text-muted-foreground">Telefone</TableCell>
                 <TableCell className="flex justify-end">
-                  {order.customer.phone ?? 'Não informado'}
+                  {product.customer.phone ?? 'Não informado'}
                 </TableCell>
               </TableRow>
               <TableRow>
                 <TableCell className="text-muted-foreground">E-mail</TableCell>
                 <TableCell className="flex justify-end">
-                  {order.customer.email}
+                  {product.customer.email}
                 </TableCell>
               </TableRow>
               <TableRow>
@@ -74,13 +74,13 @@ export function OrderDetails({ orderId, open }: OrderDetailsProps) {
                   Realizado há
                 </TableCell>
                 <TableCell className="flex justify-end">
-                   {formatDistanceToNow(order.createdAt, {
+                   {formatDistanceToNow(product.createdAt, {
                     locale: ptBR,
                     addSuffix: true,
                   })}
                 </TableCell>
               </TableRow>
-            </TableBody>
+            </TableBody> */}
           </Table>
 
           <Table>
@@ -92,8 +92,8 @@ export function OrderDetails({ orderId, open }: OrderDetailsProps) {
                 <TableHead className="text-right">Subtotal</TableHead>
               </TableRow>
             </TableHeader>
-            <TableBody>
-              {order.orderItems.map((item) => (
+            {/* <TableBody>
+              {product.productItems.map((item) => (
                 <TableRow key={item.id}>
                   <TableCell>{item.product.name}</TableCell>
                   <TableCell className="text-right">{item.quantity}</TableCell>
@@ -114,18 +114,18 @@ export function OrderDetails({ orderId, open }: OrderDetailsProps) {
                   </TableCell>
                 </TableRow>
               ))}
-            </TableBody>
-            <TableFooter>
+            </TableBody> */}
+            {/* <TableFooter>
               <TableRow>
                 <TableCell colSpan={3}>Total do pedido</TableCell>
                 <TableCell className="text-right font-medium">
-                  {(order.totalInCents / 100).toLocaleString('pt-BR', {
+                  {(product.totalInCents / 100).toLocaleString('pt-BR', {
                     style: 'currency',
                     currency: 'BRL',
                   })}
                 </TableCell>
               </TableRow>
-            </TableFooter>
+            </TableFooter> */}
           </Table>
         </div>
       )}
