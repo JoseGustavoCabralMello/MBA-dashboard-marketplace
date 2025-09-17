@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
 import { getProducts } from "@/api/get-products";
 import { ProductTableRow } from "./product-table-row";
+import { ProductTableFilters } from "./pruduct-filters";
 
 export function Products() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -34,7 +35,7 @@ export function Products() {
         <h1 className="text-3xl font-bold tracking-tight">Pedidos</h1>
       
         <div className="space-y-2.5">
-          <OrderTableFilters />
+          <ProductTableFilters />
 
           <div>
             <Table>
