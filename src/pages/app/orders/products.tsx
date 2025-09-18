@@ -5,22 +5,22 @@ import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
 import { getProducts } from "@/api/get-products";
 import { ProductTableRow } from "./product-table-row";
-import { ProductTableFilters } from "./pruduct-filters";
+import { ProductTableFilters } from "./product-filters";
 
 export function Products() {
   const [searchParams, setSearchParams] = useSearchParams()
 
-  const productId = searchParams.get('productId')
+  const id = searchParams.get('id')
   const title = searchParams.get('title')
   const description = searchParams.get('description')
   const priceInCents = searchParams.get('priceInCents')
   const status = searchParams.get('status')
 
   const { data: result } = useQuery({
-    queryKey: ['products', productId, title, description, priceInCents, status],
+    queryKey: ['products', id, title, description, priceInCents, status],
     queryFn: () =>
       getProducts({
-        productId,
+        id,
         title,
         description,
         priceInCents: priceInCents ? Number(priceInCents) : null,
@@ -54,7 +54,7 @@ export function Products() {
               <TableBody>
                 {result &&
                   result.products.map((product) => {
-                    return <ProductTableRow key={product.productId} products={product} />
+                    return <ProductTableRow key={product.id} products={product} />
                   })}
               </TableBody>
             </Table>

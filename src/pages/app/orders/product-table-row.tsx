@@ -19,7 +19,7 @@ import { ProductDetails } from "./product-details";
 
 interface ProductTableRowProps {
   products: {
-    productId: string
+    id: string
     title: string
     description: string
     priceInCents: number
@@ -44,7 +44,7 @@ export function ProductTableRow({ products }: ProductTableRowProps) {
       queryClient.setQueryData<GetProductsResponse>(cacheKey, {
         ...cacheData,
         products: cacheData.products.map((product) => {
-          if (product.productId === productId) {
+          if (product.id === productId) {
             return { ...product, status }
           }
             return product
@@ -98,12 +98,12 @@ export function ProductTableRow({ products }: ProductTableRowProps) {
             </Button>
           </DialogTrigger>
           <DialogContent>
-            <ProductDetails open={isDetailsOpen} productId={products.productId} />
+            <ProductDetails open={isDetailsOpen} productId={products.id} />
           </DialogContent>
         </Dialog>
       </TableCell>
       <TableCell className="font-mono font-medium text-sm">
-        {products.productId}
+        {products.id}
       </TableCell>
       {/* <TableCell className="text-muted-foreground">
         {formatDistanceToNow(product.createdAt, {

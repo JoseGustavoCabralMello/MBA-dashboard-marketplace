@@ -10,7 +10,7 @@ export interface GetProductsQuery {
 
 export interface GetProductsResponse {
   products: {
-    productId: string
+    id: string
     title: string
     description: string
     priceInCents: number

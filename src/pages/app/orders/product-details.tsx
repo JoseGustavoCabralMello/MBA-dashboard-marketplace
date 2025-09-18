@@ -26,7 +26,7 @@ export interface ProductDetailsProps {
 export function ProductDetails({ productId, open }: ProductDetailsProps) {
   const { data: product } = useQuery({
     queryKey: ['product', productId],
-    queryFn: () => getProductDetails({ id: productId }),
+    queryFn: () => getProductDetails({ productId }),
     enabled: open,
   })
   return (

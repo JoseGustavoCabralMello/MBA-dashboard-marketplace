@@ -1,11 +1,11 @@
 import { api } from '@/lib/axios'
 
 export interface GetProductDetailsParams {
-  id: string
+  productId: string
 }
 
 export interface GetProductDetailsResponse {
-  productId: string
+  id: string
   // createdAt: string
   // status: 'pending' | 'canceled' | 'processing' | 'delivering' | 'delivered'
   // totalInCents: number
@@ -24,8 +24,8 @@ export interface GetProductDetailsResponse {
   // }[]
 }
 
-export async function getProductDetails({ id }: GetProductDetailsParams) {
-  const response = await api.get<GetProductDetailsResponse>(`/products/${id}`)
+export async function getProductDetails({ productId }: GetProductDetailsParams) {
+  const response = await api.get<GetProductDetailsResponse>(`/products/${productId}`)
 
   console.log('get-product-details.ts')
   console.log(response.data)
