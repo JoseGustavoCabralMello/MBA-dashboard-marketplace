@@ -6,6 +6,8 @@ import { Search, X } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 import { useSearchParams } from "react-router-dom";
 import z from "zod";
+import { ProductCard } from "../dashboard/product-card";
+import { MonthCanceledOrdersAmountCard } from "../dashboard/month-canceled-orders-amount-card";
 
 const productFiltersSchema = z.object({
   productId: z.string().optional(),
@@ -137,6 +139,7 @@ export function ProductTableFilters() {
         <X className="mr-2 h-4 w-4" />
         Remover filtros
       </Button>
+      <ProductCard />
     </form>
   )
 }

@@ -2,7 +2,7 @@
 //import { ptBR } from 'date-fns/locale'
 //import { OrderDetails } from "@/pages/app/products/product-details";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { TableCell, TableRow } from "@/components/ui/table";
 import { ArrowRight, Search, X } from "lucide-react";
 //import { OrderStatus } from '@/components/product-status';
@@ -16,6 +16,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { GetProductsResponse } from '@/api/get-products';
 import { ProductStatus } from '@/components/product-status';
 import { ProductDetails } from "./product-details";
+import { ProductCard } from "../dashboard/product-card";
 
 interface ProductTableRowProps {
   products: {
@@ -89,6 +90,7 @@ export function ProductTableRow({ products }: ProductTableRowProps) {
 
   return (
     <TableRow>
+      <ProductCard />
       <TableCell>
         <Dialog open={isDetailsOpen} onOpenChange={setIsDetailsOpen}>
           <DialogTrigger asChild>
@@ -98,6 +100,7 @@ export function ProductTableRow({ products }: ProductTableRowProps) {
             </Button>
           </DialogTrigger>
           <DialogContent>
+            <DialogTitle>Detalhes do produto</DialogTitle>
             <ProductDetails open={isDetailsOpen} productId={products.id} />
           </DialogContent>
         </Dialog>
