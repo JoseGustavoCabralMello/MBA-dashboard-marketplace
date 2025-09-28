@@ -21,19 +21,11 @@ export function ProductCard({ product }: ProductCardProps) {
 
   return (
     <Card>
-      <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-base font-semibold">
-          Produto
-        </CardTitle>
-
-      </CardHeader>
+      
       <CardContent className="space-y-1">
             <div className='h-50 w-full  overflow-hidden rounded-md'>
-              <div className='bg-transparent'>
-                <p className="text-sm font-bold text-black">Status: {product.status}</p>
-              </div>
               {product.attachments.map((attachment) => (
-              <img key={attachment.id} src={attachment.url}/>
+                <img key={attachment.id} src={attachment.url}/>
               ))}
             </div>
             
@@ -47,6 +39,9 @@ export function ProductCard({ product }: ProductCardProps) {
               </span>
             </div>
             <p className="text-sm">{product.description}</p>
+            <div className='justify-items-end'>
+              <p className="text-sm">Status: {product.status}</p>
+            </div>
             
             {/* <p className="text-xs text-muted-foreground">
               {products.diffFromLastMonth < 0 ? (
