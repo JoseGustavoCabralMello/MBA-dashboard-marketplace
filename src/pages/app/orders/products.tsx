@@ -6,6 +6,7 @@ import { useSearchParams } from "react-router-dom";
 import { getProducts } from "@/api/get-products";
 import { ProductTableRow } from "./product-table-row";
 import { ProductTableFilters } from "./product-filters";
+import { ProductCard } from "../dashboard/product-card";
 
 export function Products() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -38,7 +39,20 @@ export function Products() {
           <ProductTableFilters />
 
           <div>
-            <Table>
+            {result &&
+                  result.products.map((product) => (
+                    <ProductCard
+                      key={product.id}
+                      product={{
+                        productId: product.id,
+                        title: product.title,
+                        description: product.description,
+                        priceInCents: product.priceInCents,
+                        status: product.status,
+                      }}
+                    />
+                  ))}
+            {/* <Table>
               <TableHeader>
                 <TableRow>
                   <TableHead className="w-[64px]"></TableHead>
@@ -52,12 +66,9 @@ export function Products() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {result &&
-                  result.products.map((product) => {
-                    return <ProductTableRow key={product.id} products={product} />
-                  })}
+               
               </TableBody>
-            </Table>
+            </Table> */}
           </div>
           
         </div>

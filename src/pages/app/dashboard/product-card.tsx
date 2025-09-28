@@ -6,13 +6,19 @@ import { getMonthCanceledOrdersAmount } from '@/api/get-month-canceled-orders-am
 import { getProducts } from '@/api/get-products'
 
 export interface ProductCardProps {
-  productId: string
+  product: {
+    productId: string
+    title: string
+    description: string
+    priceInCents: number
+    status: 'available' | 'sold' | 'cancelled'
+  }
 }
 
-export function ProductCard({ productId }: ProductCardProps) {
+export function ProductCard({ product }: ProductCardProps) {
   const { data: products } = useQuery({
-    queryKey: ['products', productId],
-    queryFn: () => getProducts({ id: productId }),
+    queryKey: ['products', product],
+    queryFn: () => getProducts({ id: product.productId }),
   })
 
   return (
@@ -27,8 +33,21 @@ export function ProductCard({ productId }: ProductCardProps) {
          {products && (
           <>
             <span className="text-2xl font-bold tracking-tight">
-              {products.id}
+              {product.productId}
             </span>
+            <br />
+            <span className="text-2xl font-bold tracking-tight">{product.title}</span>
+            <br />
+            <span className="text-2xl font-bold tracking-tight">{product.description}</span>
+            <br />
+            <span className="text-2xl font-bold tracking-tight">
+              {new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+              }).format(product.priceInCents / 100)}
+            </span>
+            <br />
+            <span className="text-2xl font-bold tracking-tight">Status: {product.status}</span>
             {/* <p className="text-xs text-muted-foreground">
               {products.diffFromLastMonth < 0 ? (
                 <>
