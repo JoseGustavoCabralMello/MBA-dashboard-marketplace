@@ -1,11 +1,17 @@
 import { api } from '@/lib/axios'
 
+export interface Attachment {
+  id: string
+  url: string
+}
+
 export interface GetProductsQuery {
   id?: string | null
   title?: string | null
   description?: string | null
   priceInCents?: number | null
   status?: string | null
+  attachments?: Attachment[]
 }
 
 export interface GetProduct {
@@ -14,10 +20,17 @@ export interface GetProduct {
     description: string
     priceInCents: number
     status: 'available' | 'sold' | 'cancelled'
+    attachments: Attachment[]
 }
 
 export interface GetProductsResponse {
-products: {id: string, title: string, description: string, priceInCents: number, status: 'available' | 'sold' | 'cancelled'
+products: {
+  id: string, 
+  title: string, 
+  description: string, 
+  priceInCents: number, 
+  status: 'available' | 'sold' | 'cancelled'
+  attachments: Attachment[]
 }[]
 }
 
@@ -26,7 +39,8 @@ export async function getProducts({
   title, 
   description, 
   priceInCents, 
-  status}: GetProductsQuery) {
+  status,
+  attachments,}: GetProductsQuery) {
   const response = await api.get<GetProductsResponse>('/products', {
     params:{
       id,
@@ -34,6 +48,7 @@ export async function getProducts({
       description,
       priceInCents,
       status,
+      attachments: attachments?.map(a => ({ id: a.id, url: a.url })),
     }
   })
 

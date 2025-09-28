@@ -26,24 +26,27 @@ export function Products() {
         description,
         priceInCents: priceInCents ? Number(priceInCents) : null,
         status: status === 'all' ? null : status,
+        attachments: []
       }),
   })
 
   return (
     <>
       <Helmet title="Products" />
-      <div className="flex flex-col gap-4">
+      <div className="flex gap-4">
+        <div className="space-y-2.5">
         <h1 className="text-3xl font-bold tracking-tight">Pedidos</h1>
       
-        <div className="space-y-2.5">
           <ProductTableFilters />
+        </div>
 
-          <div>
+          <div className="grid grid-cols-2 gap-2">
             {result &&
                   result.products.map((product) => (
                     <ProductCard
                       key={product.id}
                       product={{
+                        attachments: product.attachments,
                         productId: product.id,
                         title: product.title,
                         description: product.description,
@@ -71,7 +74,6 @@ export function Products() {
             </Table> */}
           </div>
           
-        </div>
       </div>
     </>
   )

@@ -3,7 +3,7 @@ import { DollarSign } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { useQuery } from '@tanstack/react-query'
 import { getMonthCanceledOrdersAmount } from '@/api/get-month-canceled-orders-amount'
-import { getProducts } from '@/api/get-products'
+import { getProducts, type Attachment } from '@/api/get-products'
 
 export interface ProductCardProps {
   product: {
@@ -12,6 +12,7 @@ export interface ProductCardProps {
     description: string
     priceInCents: number
     status: 'available' | 'sold' | 'cancelled'
+    attachments: Attachment[]
   }
 }
 
@@ -27,22 +28,26 @@ export function ProductCard({ product }: ProductCardProps) {
 
       </CardHeader>
       <CardContent className="space-y-1">
-            <span className="text-2xl font-bold tracking-tight">
-              {product.productId}
-            </span>
-            <br />
-            <span className="text-2xl font-bold tracking-tight">{product.title}</span>
-            <br />
-            <span className="text-2xl font-bold tracking-tight">{product.description}</span>
-            <br />
-            <span className="text-2xl font-bold tracking-tight">
-              {new Intl.NumberFormat('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-              }).format(product.priceInCents / 100)}
-            </span>
-            <br />
-            <span className="text-2xl font-bold tracking-tight">Status: {product.status}</span>
+            <div className='h-50 w-full  overflow-hidden rounded-md'>
+              <div className='bg-transparent'>
+                <p className="text-sm font-bold text-black">Status: {product.status}</p>
+              </div>
+              {product.attachments.map((attachment) => (
+              <img key={attachment.id} src={attachment.url}/>
+              ))}
+            </div>
+            
+            <div className='flex justify-between mb-4'>
+              <p className="font-bold tracking-tight">{product.title}</p>
+              <span className="font-bold tracking-tight">
+                {new Intl.NumberFormat('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                }).format(product.priceInCents / 100)}
+              </span>
+            </div>
+            <p className="text-sm">{product.description}</p>
+            
             {/* <p className="text-xs text-muted-foreground">
               {products.diffFromLastMonth < 0 ? (
                 <>
