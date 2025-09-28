@@ -16,10 +16,7 @@ export interface ProductCardProps {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-  const { data: products } = useQuery({
-    queryKey: ['products', product],
-    queryFn: () => getProducts({ id: product.productId }),
-  })
+  
 
   return (
     <Card>
@@ -30,8 +27,6 @@ export function ProductCard({ product }: ProductCardProps) {
 
       </CardHeader>
       <CardContent className="space-y-1">
-         {products && (
-          <>
             <span className="text-2xl font-bold tracking-tight">
               {product.productId}
             </span>
@@ -65,8 +60,6 @@ export function ProductCard({ product }: ProductCardProps) {
                 </>
               )}
             </p> */}
-          </>
-        )}
       </CardContent>
     </Card>
   )
