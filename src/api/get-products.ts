@@ -8,22 +8,33 @@ export interface GetProductsQuery {
   status?: string | null
 }
 
-// export interface GetProduct {
-//     id: string
-//     title: string
-//     description: string
-//     priceInCents: number
-//     status: 'available' | 'sold' | 'cancelled'
-// }
+export interface GetProduct {
+    id: string
+    title: string
+    description: string
+    priceInCents: number
+    status: 'available' | 'sold' | 'cancelled'
+}
 
 export interface GetProductsResponse {
 products: {id: string, title: string, description: string, priceInCents: number, status: 'available' | 'sold' | 'cancelled'
 }[]
 }
 
-export async function getProducts() {
+export async function getProducts({
+  id, 
+  title, 
+  description, 
+  priceInCents, 
+  status}: GetProductsQuery) {
   const response = await api.get<GetProductsResponse>('/products', {
-    
+    params:{
+      id,
+      title,
+      description,
+      priceInCents,
+      status,
+    }
   })
 
   console.log('get-products.ts')

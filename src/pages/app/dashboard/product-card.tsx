@@ -5,10 +5,14 @@ import { useQuery } from '@tanstack/react-query'
 import { getMonthCanceledOrdersAmount } from '@/api/get-month-canceled-orders-amount'
 import { getProducts } from '@/api/get-products'
 
-export function ProductCard() {
+export interface ProductCardProps {
+  productId: string
+}
+
+export function ProductCard({ productId }: ProductCardProps) {
   const { data: products } = useQuery({
-    queryKey: ['products'],
-    queryFn: getProducts,
+    queryKey: ['products', productId],
+    queryFn: () => getProducts({ id: productId }),
   })
 
   return (
@@ -23,7 +27,7 @@ export function ProductCard() {
          {products && (
           <>
             <span className="text-2xl font-bold tracking-tight">
-              {products.products[0].id}
+              {products.id}
             </span>
             {/* <p className="text-xs text-muted-foreground">
               {products.diffFromLastMonth < 0 ? (

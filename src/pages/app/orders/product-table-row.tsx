@@ -90,7 +90,7 @@ export function ProductTableRow({ products }: ProductTableRowProps) {
 
   return (
     <TableRow>
-      <ProductCard />
+      <ProductCard productId={products.id}/>
       <TableCell>
         <Dialog open={isDetailsOpen} onOpenChange={setIsDetailsOpen}>
           <DialogTrigger asChild>
