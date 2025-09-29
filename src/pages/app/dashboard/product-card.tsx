@@ -23,9 +23,9 @@ export function ProductCard({ product }: ProductCardProps) {
     <Card>
       
       <CardContent className="space-y-1">
-            <div className='h-50 w-full  overflow-hidden rounded-md'>
+            <div className=' justify-center w-full  overflow-hidden rounded-md'>
               {product.attachments.map((attachment) => (
-                <img key={attachment.id} src={attachment.url}/>
+                <img  key={attachment.id} src={attachment.url}/>
               ))}
             </div>
             
